@@ -25,7 +25,11 @@ export default function TextArea(props) {
         }}
       />
 
-      <Button variant="contained" color="primary">
+      <Button
+        onClick={() => props.sendMessage("menssagem enviada")}
+        variant="contained"
+        color="primary"
+      >
         Send
       </Button>
     </div>
