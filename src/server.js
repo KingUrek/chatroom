@@ -7,8 +7,8 @@ let io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
   console.log("The socket " + socket.id + " connected");
-});
-
-io.on("send message", (data) => {
-  console.log(data);
+  socket.on("send message", (data) => {
+    console.log(data);
+    io.emit("send message", data);
+  });
 });
