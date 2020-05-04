@@ -10,7 +10,7 @@ export default class OnlineList extends Component {
         <h3>Usuários online</h3>
         <AlignItemsList>
           {this.props.users.map((usr) => (
-            <OnlineUser key={_.uniqueId()} user={usr} />
+            <OnlineUser key={_.uniqueId()} user={usr.user} />
           ))}
         </AlignItemsList>
       </div>

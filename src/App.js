@@ -8,6 +8,7 @@ const socket = io("http://localhost:8080");
 socket.on("connect", () => {
   console.log("Soket with the server is open");
 });
+socket.on("disconnect");
 
 function App(props) {
   const [message, setMessage] = useState([]);
@@ -16,9 +17,7 @@ function App(props) {
 
   useEffect(() => {
     console.log("rodou o useEffect 1");
-    socket.on("user", (data) => {
-      setUsers((u) => [...u, data]);
-    });
+    socket.on("user", (data) => setUsers(data));
     socket.on("send message", (data) => {
       setMessage((m) => [...m, data.message]);
     });
@@ -27,7 +26,7 @@ function App(props) {
   useEffect(() => {
     console.log("rodou o useEffect 2");
     if (user.trim()) {
-      socket.emit("user", user);
+      socket.emit("userON", { user: user, id: socket.id });
     }
   }, [user]);
 
