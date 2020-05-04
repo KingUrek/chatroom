@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "./TextArea.css";
@@ -17,9 +17,13 @@ export default function TextArea(props) {
     e.preventDefault();
     handleSubmit();
   }
+  function sendUser() {
+    console.log("User is sented");
+    props.setUser(user);
+  }
 
   return (
-    <div>
+    <div className="chat">
       <TextField
         label="User"
         style={{ margin: 8 }}
@@ -27,6 +31,7 @@ export default function TextArea(props) {
         margin="normal"
         value={user}
         onChange={(event) => setUser(event.target.value)}
+        onBlur={sendUser}
       />
       <div className="message-area">
         <ul>

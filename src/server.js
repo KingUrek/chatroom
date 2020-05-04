@@ -11,4 +11,8 @@ io.on("connection", (socket) => {
     console.log(data);
     io.emit("send message", data);
   });
+  socket.on("user", (data) => {
+    console.log("Novo usuário " + data);
+    io.emit("user", data);
+  });
 });
