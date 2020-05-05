@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import "./TextArea.css";
+import "../style/TextArea.css";
 const _ = require("lodash");
 
 export default function TextArea(props) {
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState("annonimus");
+  // const [user, setUser] = useState("annonimus");
 
   function handleSubmit() {
-    const { sendMessage } = props;
+    const { sendMessage, user } = props;
     sendMessage({ user, message });
     setMessage("");
   }
@@ -17,14 +17,14 @@ export default function TextArea(props) {
     e.preventDefault();
     handleSubmit();
   }
-  function sendUser() {
-    console.log("User is sented");
-    props.setUser(user);
-  }
+  // function sendUser() {
+  //   console.log("User is sented");
+  //   props.setUser({ user });
+  // }
 
   return (
     <div className="chat">
-      <TextField
+      {/* <TextField
         label="User"
         style={{ margin: 8 }}
         placeholder="What is your name?"
@@ -32,9 +32,9 @@ export default function TextArea(props) {
         value={user}
         onChange={(event) => setUser(event.target.value)}
         onBlur={sendUser}
-      />
+      /> */}
       <div className="message-area">
-        <ul>
+        <ul style={{ listStyle: "none" }}>
           {props.otherMessages.map((m) => (
             <li key={_.uniqueId()}>{m}</li>
           ))}
