@@ -1,5 +1,5 @@
 let app = require("express")();
-let server = app.listen(8080, () => {
+let server = app.listen(process.env.PORT || 8080, () => {
   console.log("listen to the port 8080");
 });
 
