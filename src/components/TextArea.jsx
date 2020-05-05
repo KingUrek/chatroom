@@ -6,7 +6,6 @@ const _ = require("lodash");
 
 export default function TextArea(props) {
   const [message, setMessage] = useState("");
-  // const [user, setUser] = useState("annonimus");
 
   function handleSubmit() {
     const { sendMessage, user } = props;
@@ -17,22 +16,9 @@ export default function TextArea(props) {
     e.preventDefault();
     handleSubmit();
   }
-  // function sendUser() {
-  //   console.log("User is sented");
-  //   props.setUser({ user });
-  // }
 
   return (
     <div className="chat">
-      {/* <TextField
-        label="User"
-        style={{ margin: 8 }}
-        placeholder="What is your name?"
-        margin="normal"
-        value={user}
-        onChange={(event) => setUser(event.target.value)}
-        onBlur={sendUser}
-      /> */}
       <div className="message-area">
         <ul style={{ listStyle: "none" }}>
           {props.otherMessages.map((m) => (

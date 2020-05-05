@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./style/App.css";
 import OnlineList from "./components/OnlineList";
 import TextArea from "./components/TextArea";
 import io from "socket.io-client";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import SignModal from "./components/SignModal";
 
 const socket = io("http://localhost:8080");
 socket.on("connect", () => {
   console.log("Soket with the server is open");
 });
-// socket.on("disconnect");
 
 class App extends React.Component {
   constructor(props) {
