@@ -19,6 +19,7 @@ export default function TextArea(props) {
 
   return (
     <div className="chat">
+      <p>{props.match.params.roomId}</p>
       <div className="message-area">
         <ul style={{ listStyle: "none" }}>
           {props.otherMessages.map((m) => (

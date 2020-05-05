@@ -12,7 +12,7 @@ io.on("connection", (socket) => {
   console.log("The socket " + socket.id + " connected");
   socket.on("send message", (data) => {
     console.log(data);
-    io.emit("send message", data);
+    io.to(data.room).emit("send message", data);
   });
   socket.on("userON", (data) => {
     console.log("Novo usuário " + data.user);
@@ -24,5 +24,10 @@ io.on("connection", (socket) => {
     console.log("User " + socket.id + " has disconnected");
     onlineUsers = onlineUsers.filter((e) => e.id !== socket.id);
     io.emit("user", onlineUsers);
+  });
+  socket.on("join", (data) => {
+    socket.join(data, () => {
+      console.log("The user " + socket.id + "is in the room" + data);
+    });
   });
 });

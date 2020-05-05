@@ -20,11 +20,13 @@ class App extends React.Component {
       user: "",
     };
     this.setUser = this.setUser.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   setUser(user) {
-    this.setState({ user }, () => {
+    this.setState({ ...user }, () => {
       socket.emit("userON", { user: this.state.user, id: socket.id });
+      socket.emit("join", this.state.room);
     });
   }
 
@@ -39,8 +41,10 @@ class App extends React.Component {
   }
 
   sendMessage(message) {
-    console.log("enviando a menssagem " + message);
-    socket.emit("send message", message);
+    console.log(
+      "enviando a menssagem " + message + "para a sala" + this.state.room
+    );
+    socket.emit("send message", { ...message, room: this.state.room });
   }
 
   render() {
@@ -50,16 +54,20 @@ class App extends React.Component {
           <SignModal setUser={this.setUser} />
         </Route>
 
-        <Route path={"/rooms"}>
-          <div className="app">
-            <OnlineList users={this.state.users}></OnlineList>
-            <TextArea
-              user={this.state.user}
-              sendMessage={this.sendMessage}
-              otherMessages={this.state.message}
-            />
-          </div>
-        </Route>
+        <Route
+          path="/rooms/:roomId"
+          render={(props) => (
+            <div className="app">
+              <OnlineList users={this.state.users}></OnlineList>
+              <TextArea
+                {...props}
+                user={this.state.user}
+                sendMessage={this.sendMessage}
+                otherMessages={this.state.message}
+              />
+            </div>
+          )}
+        ></Route>
       </Router>
     );
   }
